@@ -1,16 +1,23 @@
 <html>
+<head>
+	<link rel="stylesheet" href="./style.css">
+</head>
 <body>
-	<header>
-		<h1>pixel editor</h1>
+	<header class="bg-pastel mb-2">
+		<div class="container">
+			<h1 class="title blue pv-1">pixel editor</h1>
+		</div>
 	</header>
 	<main>
-		<aside>
-			<div id="picker" />
-		</aside>
-		<section>
-			<div id="grid" />
-			<div id="download" />
-		</section>
+		<div class="container grid">
+			<aside>
+				<div id="picker" class="pv-1" />
+			</aside>
+			<section>
+				<div id="grid" class="pv-1" />
+				<div id="download" class="pv-1" />
+			</section>
+		</div>
 	</main>
 	<script src="./index.js"></script>
 </body>

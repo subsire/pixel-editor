@@ -1,0 +1,47 @@
+/* Base reset */
+html, body,
+h1 {
+	border: 0;
+	font: inherit;
+	font-size: 100%;
+	margin: 0;
+	padding: 0;
+	vertical-align: baseline;
+}
+body {
+	line-height: 1;
+}
+
+/* Grid */
+.container {
+	margin: 0 auto;
+	width: 895px;
+}
+.grid {
+	display: grid;
+	grid-template-columns: 135px auto;
+}
+
+/* Spaces */
+.mb-2 {
+	margin-bottom: 2.25rem;
+}
+.pv-1 {
+	padding-bottom: 1rem;
+	padding-top: 1rem;
+}
+
+/* Colors -- Background */
+.bg-pastel {
+	background-color: #f6f9ff;
+}
+/* Colors -- Text */
+.blue {
+	color: #2d67ff;
+}
+
+/* Typography */
+.title {
+	font-size: 2rem;
+	font-weight: 700;
+}
