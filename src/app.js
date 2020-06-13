@@ -14,7 +14,7 @@ export const App = () => {
 
 	const form = new Form({ containerId: 'form', store });
 	const grid = new Grid({ containerId: 'grid', store });
-	const picker = new Picker({ containerId: 'picker' });
+	const picker = new Picker({ containerId: 'picker', store });
 
 	// Initial render
 	form.render();

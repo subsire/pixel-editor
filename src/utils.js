@@ -1,4 +1,4 @@
-export const createElement = (tag, parent = document.body, { id = null, className = null, cssProp = null, props = null } = {}) => {
+export const createElement = (tag, parent = document.body, { id = null, className = null, styles = null, props = null } = {}) => {
 	const element = document.createElement(tag);
 
 	if (id) {
@@ -10,11 +10,13 @@ export const createElement = (tag, parent = document.body, { id = null, classNam
 				element.classList.add(name);
 			});
 		} else {
-			element.classList.add(className);
+			className.split(' ').forEach((name) => {
+				element.classList.add(name);
+			});
 		}
 	}
-	if (cssProp) {
-		Object.entries(cssProp).forEach(([key, value]) => {
+	if (styles) {
+		Object.entries(styles).forEach(([key, value]) => {
 			element.style[key] = value;
 		});
 	}
@@ -33,4 +35,41 @@ export const createElement = (tag, parent = document.body, { id = null, classNam
 export const resetHtml = (id) => {
 	const element = document.getElementById(id);
 	element.textContent = '';
-}
+};
+
+// Colors!
+export const colors = [
+	[255, 0, 0],
+	[255, 255, 0],
+	[0, 255, 0],
+	[0, 255, 255],
+	[0, 0, 255],
+	[255, 0, 255],
+	[255, 0, 0],
+];
+export const valueToRgb = (value) => {
+	const offset = (colors.length - 1) * value;
+	const index  = Math.min(Math.floor(offset), colors.length - 2);
+
+	const colorNext = colors[ index + 1 ];
+	const colorCurr = colors[ index ];
+	const colorFrac = offset - index;
+
+	// Linear interpolation utility used to compute blend between current and next colour
+	function mix(from, to, frac) {
+		return parseInt((to - from) * frac + from);
+	}
+
+	return {
+		red:   mix(colorCurr[0], colorNext[1], colorFrac),
+		green: mix(colorCurr[1], colorNext[1], colorFrac),
+		blue:  mix(colorCurr[2], colorNext[2], colorFrac),
+	};
+};
+const componentToHex = (component) => {
+	const hex = component.toString(16);
+	return hex.length === 1 ? "0" + hex : hex;
+};
+export const rgbToHex = (color) => {
+	return "#" + componentToHex(color.red) + componentToHex(color.green) + componentToHex(color.blue);
+};
