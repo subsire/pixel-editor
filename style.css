@@ -66,8 +66,21 @@ body {
 .form-input {
 	border: 1px solid #e0e0e0;
 	border-radius: .5rem;
-	height: 45px;
 	font-size: 1rem;
+	height: 45px;
 	padding: .5rem;
 	width: 101px;
+}
+.form-input-color {
+	text-align: center;
+	text-decoration: underline;
+}
+.picker-container {
+	width: 110px;
+}
+.picker-slider {
+	border-radius: 9999px;
+	height: 500px;
+	margin: 0 auto;
+	width: 34px;
 }
