@@ -13,6 +13,8 @@ export const Grid = ({ containerId, store }) => {
 	context.canvas.height = canvasWidth;
 
 	const drawGrid = (size) => {
+		context.clearRect(0, 0, canvasWidth, canvasWidth);
+
 		const step = canvasWidth / size;
 
 		for (let x = 0; x < canvasWidth + 1; x += step) {
@@ -36,7 +38,7 @@ export const Grid = ({ containerId, store }) => {
     	context.fillRect(x * step, y * step, step, step);
 	};
 	const render = () => {
-		
+
 		drawGrid(store.get('size'));
 	};
 
