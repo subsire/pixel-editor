@@ -1,4 +1,4 @@
-export const createElement = (tag, parent = document.body, { id = null, className = null, cssProp = null, args = null } = {}) => {
+export const createElement = (tag, parent = document.body, { id = null, className = null, cssProp = null, props = null } = {}) => {
 	const element = document.createElement(tag);
 
 	if (id) {
@@ -18,8 +18,8 @@ export const createElement = (tag, parent = document.body, { id = null, classNam
 			element.style[key] = value;
 		});
 	}
-	if (args) {
-		Object.entries(args).forEach(([key, value]) => {
+	if (props) {
+		Object.entries(props).forEach(([key, value]) => {
 			element[key] = value;
 		});
 	}

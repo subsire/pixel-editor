@@ -63,3 +63,11 @@ body {
 	margin: 0 auto;
 	width: 498px;
 }
+.form-input {
+	border: 1px solid #e0e0e0;
+	border-radius: .5rem;
+	height: 45px;
+	font-size: 1rem;
+	padding: .5rem;
+	width: 101px;
+}

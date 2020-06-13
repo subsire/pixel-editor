@@ -4,15 +4,17 @@ export const Form = ({ containerId, store }) => {
 	resetHtml(containerId);
 
 	const colorContainer = createElement('div', document.getElementById(containerId));
-	const sizeContainer = createElement('div', document.getElementById(containerId));
+	const sizeContainer  = createElement('div', document.getElementById(containerId));
 
-	const colorInput  = createElement('input', colorContainer, { args: { type: 'color', value: store.get('color') }});
-	const widthInput  = createElement('input', sizeContainer, { args: { type: 'number', value: store.get('size') }});
-	const heightInput = createElement('input', sizeContainer, { args: { type: 'number', value: store.get('size') }});
+	const colorInput  = createElement('input', colorContainer, { className: 'form-input', props: { type: 'color', value: store.get('color') }}); // type: color, only wip
+	const widthInput  = createElement('input', sizeContainer, { className: 'form-input', props: { type: 'number', value: store.get('size') }});
+	const heightInput = createElement('input', sizeContainer, { className: 'form-input', props: { type: 'number', value: store.get('size') }});
 
 	// Methods
 	const render = () => {
-		colorInput.value  = store.get('color');
+		colorInput.value = store.get('color');
+		colorInput.style.backgroundColor = store.get('color');
+
 		widthInput.value  = store.get('size');
 		heightInput.value = store.get('size');
 	};
