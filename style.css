@@ -12,6 +12,9 @@ h1 {
 body {
 	line-height: 1;
 }
+* {
+	box-sizing: border-box;
+}
 
 /* Grid */
 .container {
@@ -20,7 +23,7 @@ body {
 }
 .grid {
 	display: grid;
-	grid-template-columns: 135px auto;
+	grid-template-columns: 195px auto;
 }
 
 /* Spaces */
@@ -45,4 +48,22 @@ body {
 .title {
 	font-size: 2rem;
 	font-weight: 500;
+}
+
+
+/* Components */
+.grid-container {
+	box-shadow: 0 0 1rem 0 rgba(0, 0, 0, .25);
+	height: 500px;
+	width: 100%;
+}
+.grid-container-box {
+	height: 500px;
+	margin: 0 auto;
+	padding: 1px;
+	width: 500px;
+}
+.grid-container-box > canvas {
+	height: 100%;
+	width: 100%;
 }

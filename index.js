@@ -1,3 +1,3 @@
-import { a } from "./moduleA";
+import { App } from './src/app';
 
-console.log(a);
+document.addEventListener('DOMContentLoaded', App);
