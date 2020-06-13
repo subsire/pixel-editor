@@ -12,7 +12,7 @@ const defaultState = {
 export const App = () => {
 	const store = createStore(defaultState);
 
-	const form = new Form({ containerId: 'form' });
+	const form = new Form({ containerId: 'form', store });
 	const grid = new Grid({ containerId: 'grid', store });
 	const picker = new Picker({ containerId: 'picker' });
 
