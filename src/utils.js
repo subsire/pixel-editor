@@ -1,7 +1,4 @@
-export const createElement = (tag, parent = document.body, id = null, className = null, cssProp = {},) => {
-
-	console.log(tag, parent);
-
+export const createElement = (tag, parent = document.body, id = null, className = null, cssProp = {}) => {
 	const element = document.createElement(tag);
 	if (id) {
 		element.setAttribute('id', id);
@@ -21,4 +18,10 @@ export const createElement = (tag, parent = document.body, id = null, className 
 	parent.appendChild(element);
 
 	return element;
+};
+
+// To handle parcel refresh
+export const resetHtml = (id) => {
+	const element = document.getElementById(id);
+	element.textContent = '';
 }
