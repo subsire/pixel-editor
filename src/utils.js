@@ -1,5 +1,6 @@
-export const createElement = (tag, parent = document.body, id = null, className = null, cssProp = {}) => {
+export const createElement = (tag, parent = document.body, { id = null, className = null, cssProp = null, args = null } = {}) => {
 	const element = document.createElement(tag);
+
 	if (id) {
 		element.setAttribute('id', id);
 	}
@@ -12,9 +13,17 @@ export const createElement = (tag, parent = document.body, id = null, className 
 			element.classList.add(className);
 		}
 	}
-	Object.entries(cssProp).forEach(([key, value]) => {
-		element.style[key] = value;
-	});
+	if (cssProp) {
+		Object.entries(cssProp).forEach(([key, value]) => {
+			element.style[key] = value;
+		});
+	}
+	if (args) {
+		Object.entries(args).forEach(([key, value]) => {
+			element[key] = value;
+		});
+	}
+
 	parent.appendChild(element);
 
 	return element;
