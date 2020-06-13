@@ -6,22 +6,16 @@ const Store = (defaultState) => {
 		let dispatcher = 'none';
 		switch (action) {
 			case 'setColor':
-				/*
+				/* Parcel doesn't like spread operator... ??
 				state = {
 					...state,
 					color: payload,
 				};
 				*/
-				state = Object.assign(state, { color: paylod });
+				state = Object.assign(state, { color: payload });
 				dispatcher = 'colorChange';
 				break;
 			case 'setSize':
-				/*
-				state = {
-					...state,
-					size: payload,
-				};
-				*/
 				state = Object.assign(state, { size: payload });
 				dispatcher = 'sizeChange';
 				break;
@@ -31,8 +25,8 @@ const Store = (defaultState) => {
 
 		if (dispatcher !== 'none') {
 			subscribers
-				.filter((subscriber) => ( subscriber.listener === dispatcher || subscriber.listener === 'all' ))
-				.forEach((subscriber) => { console.log(subscriber.listener); subscriber.callback(); })
+				.filter((subscriber) => ( subscriber.listener.includes(dispatcher) || subscriber.listener === 'all' ))
+				.forEach((subscriber) => { subscriber.callback(); })
 		}
 	};
 	const get = (value) => {
