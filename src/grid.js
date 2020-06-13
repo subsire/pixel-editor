@@ -3,8 +3,8 @@ import { createElement, resetHtml } from './utils';
 export const Grid = ({ containerId, store }) => {
 	resetHtml(containerId);
 
-	const container = createElement('div', document.getElementById(containerId), null, 'grid-container');
-	const containerBox = createElement('div', container, null, 'grid-container-box');
+	const container = createElement('div', document.getElementById(containerId), { className: 'grid-container' });
+	const containerBox = createElement('div', container, { className: 'grid-container-box' });
 	const canvas = createElement('canvas', containerBox);
 	const canvasWidth = containerBox.offsetWidth;
 	const context = canvas.getContext('2d');
@@ -12,10 +12,14 @@ export const Grid = ({ containerId, store }) => {
 	context.canvas.width  = canvasWidth;
 	context.canvas.height = canvasWidth;
 
+	// Methods
 	const drawGrid = (size) => {
 		context.clearRect(0, 0, canvasWidth, canvasWidth);
 
 		const step = canvasWidth / size;
+
+		context.beginPath();
+		context.strokeStyle = "#e0e0e0";
 
 		for (let x = 0; x < canvasWidth + 1; x += step) {
 	 		context.moveTo(x, 0);
@@ -27,7 +31,6 @@ export const Grid = ({ containerId, store }) => {
 			context.lineTo(canvasWidth, y);
 		}
 
-		context.strokeStyle = "#e0e0e0";
 		context.stroke();
 	};
 	const paint = (x, y, color = '#ffffff') => {
@@ -42,10 +45,8 @@ export const Grid = ({ containerId, store }) => {
 		drawGrid(store.get('size'));
 	};
 
-	if (store && typeof store.subscribe === 'function') {
-		store.subscribe('sizeChange', render);
-	}
-	canvas.addEventListener('click', (evt) => {
+	// Handlers
+	const handleClick = (evt) => {
 		const rect   = canvas.getBoundingClientRect();
 		const mouseX = evt.clientX - rect.left;
 		const mouseY = evt.clientY - rect.top;
@@ -57,7 +58,11 @@ export const Grid = ({ containerId, store }) => {
 		const y = Math.floor(mouseY / canvasWidth * size);
 
 		paint(x, y, color);
-	});
+	};
+
+	// Listeners
+	store.subscribe('sizeChange', render);
+	canvas.addEventListener('click', handleClick);
 
 	return {
 		render
