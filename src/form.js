@@ -1,6 +1,11 @@
 import { actionTypes } from './store';
 import { createElement, contrastingColor, resetHtml } from './utils';
 
+const sizeRange = {
+	min: 1,
+	max: 498,
+};
+
 export const Form = ({ containerId, store }) => {
 	resetHtml(containerId);
 
@@ -8,29 +13,27 @@ export const Form = ({ containerId, store }) => {
 	const sizeContainer  = createElement('div', document.getElementById(containerId));
 
 	const colorInput  = createElement('input', colorContainer, { className: 'form-input form-input-color', props: { type: 'text', value: store.get('color').toUpperCase(), disabled: true }});
-	const widthInput  = createElement('input', sizeContainer, { className: 'form-input spacer', props: { type: 'number', value: store.get('size') }});
-	const heightInput = createElement('input', sizeContainer, { className: 'form-input', props: { type: 'number', value: store.get('size') }});
+	const widthInput  = createElement('input', sizeContainer, { className: 'form-input spacer', props: { type: 'number', value: store.get('size'), min: sizeRange.min, max: sizeRange.max }});
+	const heightInput = createElement('input', sizeContainer, { className: 'form-input', props: { type: 'number', value: store.get('size'), min: sizeRange.min, max: sizeRange.max }});
 
 	// Methods
 	const render = () => {
-		colorInput.value = store.get('color').toUpperCase();
-		colorInput.style.backgroundColor = store.get('color');
-		colorInput.style.color = contrastingColor(store.get('color'));
+		const color = store.get('color');
+
+		colorInput.value = color.toUpperCase();
+		colorInput.style.backgroundColor = color;
+		colorInput.style.color = contrastingColor(color);
 
 		widthInput.value  = store.get('size');
 		heightInput.value = store.get('size');
 	};
 	// Handlers
-	const handleColorChange = (evt) => {
-		store.dispatch(actionTypes.UPDATE_COLOR, evt.target.value);
-	};
 	const handleSizeChange = (evt) => {
-		store.dispatch(actionTypes.UPDATE_SIZE, evt.target.value);
+		store.dispatch(actionTypes.UPDATE_SIZE, Math.max(sizeRange.min, Math.min(sizeRange.max, parseInt(evt.target.value))));
 	};
 
 	// Listeners
 	store.subscribe(`${actionTypes.UPDATE_COLOR} ${actionTypes.UPDATE_SIZE}`, render);
-	// colorInput.addEventListener('change', handleColorChange);
 	widthInput.addEventListener('change', handleSizeChange);
 	heightInput.addEventListener('change', handleSizeChange);
 
