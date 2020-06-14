@@ -1,3 +1,5 @@
+import { getGridMatrix } from './utils';
+
 export const actionTypes = {
 	ALL:          'all',
 	UPDATE_COLOR: 'updateColor',
@@ -21,11 +23,16 @@ const Store = (defaultState) => {
 				state = Object.assign(state, { color: payload });
 				break;
 			case actionTypes.UPDATE_GRID:
-				// TODO : update grid x,y+color
+				const { grid } = state;
+				const { color, x, y } = payload;
+				grid[x][y] = color;
+				state = Object.assign(state, { grid });
 				break;
 			case actionTypes.UPDATE_SIZE:
-				state = Object.assign(state, { size: payload });
-				// TODO : redraw gridMatrix (size x size)
+				state = Object.assign(state, {
+					size: payload,
+					grid: getGridMatrix(payload),
+				 });
 				break;
 			default:
 				break;
@@ -56,8 +63,8 @@ const Store = (defaultState) => {
 
 export const defaultState = {
 	color: '#ff0000',
-	gridMatrix: [],
-	size: 16,
+	grid:  getGridMatrix(16),
+	size:  16,
 };
 
 export const createStore = (initialState) => { return new Store(initialState); };

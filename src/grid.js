@@ -40,6 +40,8 @@ export const Grid = ({ containerId, store }) => {
 
 		context.fillStyle = color;
     	context.fillRect(x * step, y * step, step, step);
+
+		store.dispatch(actionTypes.UPDATE_GRID, { x, y, color });
 	};
 	const render = () => {
 

@@ -31,7 +31,7 @@ export const createElement = (tag, parent = document.body, { id = null, classNam
 	return element;
 };
 
-// To handle parcel refresh
+// Handling parcel refresh
 export const resetHtml = (id) => {
 	const element = document.getElementById(id);
 	element.textContent = '';
@@ -66,7 +66,7 @@ export const valueToRgb = (value) => {
 		blue:  mix(colorCurr[2], colorNext[2], colorFrac),
 	};
 };
-const decimalToHex = (decimal) => {
+export const decimalToHex = (decimal) => {
 	const hex = decimal.toString(16);
 	return hex.length === 1 ? "0" + hex : hex;
 };
@@ -74,7 +74,7 @@ export const hexToRgb = (hex) => {
 	if (hex.indexOf('#') === 0) {
 		hex = hex.slice(1);
 	}
-	// convert 3-digit hex to 6-digits.
+	// Convert 3-digit hex to 6-digits.
 	if (hex.length === 3) {
 		hex = hex[0] + hex[0] + hex[1] + hex[1] + hex[2] + hex[2];
 	}
@@ -91,4 +91,7 @@ export const contrastingColor = (color) => {
 	const rgb = hexToRgb(color);
 	const yiq = ((rgb.red * 299) + (rgb.green * 587) + (rgb.blue * 114)) / 1000
 	return (yiq >= 128) ? '#000' : '#fff'
-}
+};
+
+//
+export const getGridMatrix = (size) => ( Array(parseInt(size)).fill().map(() => ( Array(parseInt(size)).fill() )) );
