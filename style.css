@@ -71,11 +71,15 @@ body {
 	padding: .5rem;
 	width: 101px;
 }
+.form-input.spacer {
+	margin-right: 42px;
+}
 .form-input-color {
 	text-align: center;
 	text-decoration: underline;
 }
 .picker-container {
+	cursor: pointer;
 	position: relative;
 	width: 110px;
 }
@@ -93,4 +97,24 @@ body {
 }
 .picker-arrows > svg {
 	margin-top: -14px;
+}
+.download-button {
+	align-items: center;
+	background-color: #2d67ff;
+	border: none;
+	border-radius: 5px;
+	color: #fff;
+	cursor: pointer;
+	display: inline-flex;
+	float: right;
+	height: 50px;
+	justify-content: center;
+	margin: 0 1px;
+	width: 161px;
+}
+.download-button > svg {
+	fill: #fff;
+	margin-right: .5rem;
+	position: relative;
+	width: 25px;
 }
