@@ -3,7 +3,7 @@ html, body,
 h1 {
 	border: 0;
 	font: inherit;
-	font-family: -apple-system,BlinkMacSystemFont,Segoe UI,Helvetica,Arial,sans-serif,Apple Color Emoji,Segoe UI Emoji;
+	font-family: -apple-system,BlinkMacSystemFont,Segoe UI,Helvetica,Arial,sans-serif,Apple Color Emoji,Segoe UI Emoji; /* GitHub default font-family */
 	font-size: 100%;
 	margin: 0;
 	padding: 0;
@@ -16,7 +16,7 @@ body {
 	box-sizing: border-box;
 }
 
-/* Grid */
+/* Layout */
 .container {
 	margin: 0 auto;
 	width: 895px;
@@ -71,8 +71,14 @@ body {
 	padding: .5rem;
 	width: 101px;
 }
-.form-input.spacer {
-	margin-right: 42px;
+.form-input-space-x {
+	display: inline;
+	width: 42px;
+}
+.flex-container {
+	align-items: center;
+	display: inline-flex;
+	justify-content: start;
 }
 .form-input-color {
 	text-align: center;
@@ -107,6 +113,7 @@ body {
 	cursor: pointer;
 	display: inline-flex;
 	float: right;
+	font-size: 1rem;
 	height: 50px;
 	justify-content: center;
 	margin: 0 1px;

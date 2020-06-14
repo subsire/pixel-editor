@@ -3,10 +3,8 @@ import { colors, createElement, resetHtml, valueToHex } from './utils';
 
 const arrowsSVG = `
 <svg xmlns="http://www.w3.org/2000/svg" width="111" height="28" viewBox="0 0 111 28">
-  <g>
     <polygon points="0 28 0 0 16 14 0 28" class="arrow"/>
     <polygon points="111 0 111 28 95 14 111 0" class="arrow"/>
-  </g>
 </svg>
 `;
 
