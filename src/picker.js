@@ -31,7 +31,7 @@ export const Picker = ({ containerId, store }) => {
 	const updateColorFromClientY = (clientY) => {
 		const rect = slider.getBoundingClientRect();
 		const mouseY = clientY - rect.top;
-		colorValue = Math.max(0, Math.min(1 - mouseY / maxRange, maxRange));
+		colorValue = Math.max(0, Math.min(1 - mouseY / maxRange, 1));
 
 		const rgb = valueToRgb(colorValue);
 		store.dispatch(actionTypes.UPDATE_COLOR, rgbToHex(rgb));
