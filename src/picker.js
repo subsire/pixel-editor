@@ -12,8 +12,7 @@ const arrowsSVG = `
 export const Picker = ({ containerId, store }) => {
 	resetHtml(containerId);
 
-	let value = 0;
-
+	let colorValue   = 0;
 	const container  = createElement('div', document.getElementById(containerId), { className: 'picker-container' });
 	const slider     = createElement('div', container, { className: 'picker-slider', styles: { background: 'linear-gradient(to top' + colors.reduce((style, color) => ( `${style}, rgb(${color[0]}, ${color[1]}, ${color[2]})`), '') + ')' }});
 	const arrows     = createElement('div', container, { className: 'picker-arrows' });
@@ -23,18 +22,17 @@ export const Picker = ({ containerId, store }) => {
 
 	// Methods
 	const render = () => {
-		arrows.style.top = `${(1 - value) * 100}%`;
-		const elements = arrows.getElementsByClassName('arrow');
-		for (let i = 0; i < elements.length; i++) {
-			elements[i].style.fill = store.get('color');
-		}
+		arrows.style.top = `${(1 - colorValue) * 100}%`;
+		Array.from(arrows.getElementsByClassName('arrow')).forEach((element) => {
+			element.style.fill = store.get('color');
+		});
 	};
 	const updateColorFromClientY = (clientY) => {
 		const rect = slider.getBoundingClientRect();
 		const mouseY = clientY - rect.top;
-		value = 1 - mouseY / maxRange;
+		colorValue = Math.max(0, Math.min(1 - mouseY / maxRange, maxRange));
 
-		const rgb = valueToRgb(value);
+		const rgb = valueToRgb(colorValue);
 		store.dispatch('setColor', rgbToHex(rgb));
 
 		render();
