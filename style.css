@@ -76,11 +76,21 @@ body {
 	text-decoration: underline;
 }
 .picker-container {
+	position: relative;
 	width: 110px;
 }
 .picker-slider {
 	border-radius: 9999px;
 	height: 500px;
 	margin: 0 auto;
+	pointer-events: none;
 	width: 34px;
+}
+.picker-arrows {
+	left: 0;
+	pointer-events: none;
+	position: absolute;
+}
+.picker-arrows > svg {
+	margin-top: -14px;
 }
