@@ -1,5 +1,5 @@
 import { actionTypes } from './store';
-import { createElement, resetHtml } from './utils';
+import { createElement, resetHtml, valueToHex } from './utils';
 
 export const Grid = ({ containerId, store }) => {
 	resetHtml(containerId);
@@ -55,7 +55,7 @@ export const Grid = ({ containerId, store }) => {
 		const mouseY = evt.clientY - rect.top;
 
 		const size  = store.get('size');
-		const color = store.get('color');
+		const color = valueToHex(store.get('color'));
 
 		const x = Math.floor(mouseX / canvasWidth * size);
 		const y = Math.floor(mouseY / canvasWidth * size);

@@ -1,5 +1,5 @@
 import { actionTypes } from './store';
-import { colors, createElement, resetHtml, rgbToHex, valueToRgb } from './utils';
+import { colors, createElement, resetHtml, valueToHex } from './utils';
 
 const arrowsSVG = `
 <svg xmlns="http://www.w3.org/2000/svg" width="111" height="28" viewBox="0 0 111 28">
@@ -13,7 +13,6 @@ const arrowsSVG = `
 export const Picker = ({ containerId, store }) => {
 	resetHtml(containerId);
 
-	let colorValue   = 0;
 	const container  = createElement('div', document.getElementById(containerId), { className: 'picker-container' });
 	const slider     = createElement('div', container, { className: 'picker-slider', styles: { background: 'linear-gradient(to top' + colors.reduce((style, color) => ( `${style}, rgb(${color[0]}, ${color[1]}, ${color[2]})`), '') + ')' }});
 	const arrows     = createElement('div', container, { className: 'picker-arrows' });
@@ -23,26 +22,26 @@ export const Picker = ({ containerId, store }) => {
 
 	// Methods
 	const render = () => {
-		arrows.style.top = `${(1 - colorValue) * 100}%`;
+		const color = store.get('color');
+		const hexColor = valueToHex(color);
+
+		arrows.style.top = `${(1 - color) * 100}%`;
 		Array.from(arrows.getElementsByClassName('arrow')).forEach((element) => {
-			element.style.fill = store.get('color');
+			element.style.fill = hexColor;
 		});
 	};
 	const updateColorFromClientY = (clientY) => {
 		const rect = slider.getBoundingClientRect();
 		const mouseY = clientY - rect.top;
-		colorValue = Math.max(0, Math.min(1 - mouseY / maxRange, 1));
 
-		const rgb = valueToRgb(colorValue);
-		store.dispatch(actionTypes.UPDATE_COLOR, rgbToHex(rgb));
-
+		store.dispatch(actionTypes.UPDATE_COLOR, Math.max(0, Math.min(1 - mouseY / maxRange, 1)));
 		render();
 	};
 	// Handlers
 	const handleMouseDown = (evt) => {
 		container.addEventListener('mousemove', handleMouseMove);
-		container.addEventListener('mouseup', handleMouseUp);
 		container.addEventListener('mouseout', handleMouseUp);
+		document.addEventListener('mouseup', handleMouseUp);
 
 		updateColorFromClientY(evt.clientY);
 	};
@@ -51,8 +50,8 @@ export const Picker = ({ containerId, store }) => {
 	};
 	const handleMouseUp = (evt) => {
 		container.removeEventListener('mousemove', handleMouseMove);
-		container.removeEventListener('mouseup', handleMouseUp);
 		container.removeEventListener('mouseout', handleMouseUp);
+		document.removeEventListener('mouseup', handleMouseUp);
 
 		updateColorFromClientY(evt.clientY);
 	};

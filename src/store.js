@@ -1,5 +1,11 @@
 import { getGridMatrix } from './utils';
 
+export const defaultState = {
+	color: 0.5,
+	grid:  getGridMatrix(16),
+	size:  16,
+};
+
 export const actionTypes = {
 	ALL:          'all',
 	UPDATE_COLOR: 'updateColor',
@@ -59,12 +65,6 @@ const Store = (defaultState) => {
 		get,
 		subscribe,
 	};
-};
-
-export const defaultState = {
-	color: '#ff0000',
-	grid:  getGridMatrix(16),
-	size:  16,
 };
 
 export const createStore = (initialState) => { return new Store(initialState); };

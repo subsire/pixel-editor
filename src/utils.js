@@ -87,6 +87,7 @@ export const hexToRgb = (hex) => {
 export const rgbToHex = (color) => {
 	return "#" + decimalToHex(color.red) + decimalToHex(color.green) + decimalToHex(color.blue);
 };
+export const valueToHex = (value) => ( rgbToHex(valueToRgb(value)) );
 export const contrastingColor = (color) => {
 	const rgb = hexToRgb(color);
 	const yiq = ((rgb.red * 299) + (rgb.green * 587) + (rgb.blue * 114)) / 1000

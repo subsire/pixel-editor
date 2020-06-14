@@ -1,5 +1,5 @@
 import { actionTypes } from './store';
-import { createElement, contrastingColor, resetHtml } from './utils';
+import { createElement, contrastingColor, resetHtml, valueToHex } from './utils';
 
 const sizeRange = {
 	min: 1,
@@ -12,13 +12,13 @@ export const Form = ({ containerId, store }) => {
 	const colorContainer = createElement('div', document.getElementById(containerId));
 	const sizeContainer  = createElement('div', document.getElementById(containerId));
 
-	const colorInput  = createElement('input', colorContainer, { className: 'form-input form-input-color', props: { type: 'text', value: store.get('color').toUpperCase(), disabled: true }});
+	const colorInput  = createElement('input', colorContainer, { className: 'form-input form-input-color', props: { type: 'text', disabled: true }});
 	const widthInput  = createElement('input', sizeContainer, { className: 'form-input spacer', props: { type: 'number', value: store.get('size'), min: sizeRange.min, max: sizeRange.max }});
 	const heightInput = createElement('input', sizeContainer, { className: 'form-input', props: { type: 'number', value: store.get('size'), min: sizeRange.min, max: sizeRange.max }});
 
 	// Methods
 	const render = () => {
-		const color = store.get('color');
+		const color = valueToHex(store.get('color'));
 
 		colorInput.value = color.toUpperCase();
 		colorInput.style.backgroundColor = color;
