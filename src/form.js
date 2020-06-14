@@ -1,4 +1,4 @@
-import { createElement, resetHtml } from './utils';
+import { createElement, contrastingColor, resetHtml } from './utils';
 
 export const Form = ({ containerId, store }) => {
 	resetHtml(containerId);
@@ -6,7 +6,7 @@ export const Form = ({ containerId, store }) => {
 	const colorContainer = createElement('div', document.getElementById(containerId));
 	const sizeContainer  = createElement('div', document.getElementById(containerId));
 
-	const colorInput  = createElement('input', colorContainer, { className: 'form-input form-input-color', props: { type: 'text', value: store.get('color').toUpperCase(), disabled: true }}); // type: color, only wip
+	const colorInput  = createElement('input', colorContainer, { className: 'form-input form-input-color', props: { type: 'text', value: store.get('color').toUpperCase(), disabled: true }});
 	const widthInput  = createElement('input', sizeContainer, { className: 'form-input', props: { type: 'number', value: store.get('size') }});
 	const heightInput = createElement('input', sizeContainer, { className: 'form-input', props: { type: 'number', value: store.get('size') }});
 
@@ -14,7 +14,7 @@ export const Form = ({ containerId, store }) => {
 	const render = () => {
 		colorInput.value = store.get('color').toUpperCase();
 		colorInput.style.backgroundColor = store.get('color');
-		// TODO : text color inverted ==> https://github.com/casesandberg/react-color/blob/master/src/helpers/color.js
+		colorInput.style.color = contrastingColor(store.get('color'));
 
 		widthInput.value  = store.get('size');
 		heightInput.value = store.get('size');

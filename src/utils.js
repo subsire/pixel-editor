@@ -66,10 +66,29 @@ export const valueToRgb = (value) => {
 		blue:  mix(colorCurr[2], colorNext[2], colorFrac),
 	};
 };
-const componentToHex = (component) => {
-	const hex = component.toString(16);
+const decimalToHex = (decimal) => {
+	const hex = decimal.toString(16);
 	return hex.length === 1 ? "0" + hex : hex;
 };
-export const rgbToHex = (color) => {
-	return "#" + componentToHex(color.red) + componentToHex(color.green) + componentToHex(color.blue);
+export const hexToRgb = (hex) => {
+	if (hex.indexOf('#') === 0) {
+		hex = hex.slice(1);
+	}
+	// convert 3-digit hex to 6-digits.
+	if (hex.length === 3) {
+		hex = hex[0] + hex[0] + hex[1] + hex[1] + hex[2] + hex[2];
+	}
+	return {
+		red:   parseInt(hex.slice(0, 2), 16),
+		green: parseInt(hex.slice(2, 4), 16),
+		blue:  parseInt(hex.slice(4, 6), 16),
+	}
 };
+export const rgbToHex = (color) => {
+	return "#" + decimalToHex(color.red) + decimalToHex(color.green) + decimalToHex(color.blue);
+};
+export const contrastingColor = (color) => {
+	const rgb = hexToRgb(color);
+	const yiq = ((rgb.red * 299) + (rgb.green * 587) + (rgb.blue * 114)) / 1000
+	return (yiq >= 128) ? '#000' : '#fff'
+}
