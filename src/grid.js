@@ -1,3 +1,4 @@
+import { actionTypes } from './store';
 import { createElement, resetHtml } from './utils';
 
 export const Grid = ({ containerId, store }) => {
@@ -19,7 +20,7 @@ export const Grid = ({ containerId, store }) => {
 		const step = canvasWidth / size;
 
 		context.beginPath();
-		context.strokeStyle = "#e0e0e0";
+		context.strokeStyle = '#e0e0e0';
 
 		for (let x = 0; x < canvasWidth + 1; x += step) {
 	 		context.moveTo(x, 0);
@@ -61,7 +62,7 @@ export const Grid = ({ containerId, store }) => {
 	};
 
 	// Listeners
-	store.subscribe('sizeChange', render);
+	store.subscribe(actionTypes.UPDATE_SIZE, render);
 	canvas.addEventListener('click', handleClick);
 
 	return {

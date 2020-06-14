@@ -1,11 +1,17 @@
+export const actionTypes = {
+	ALL:          'all',
+	UPDATE_COLOR: 'updateColor',
+	UPDATE_GRID:  'updateGrid',
+	UPDATE_SIZE:  'updateSize',
+};
+
 const Store = (defaultState) => {
 	let state = Object.assign({}, defaultState);
 	const subscribers = [];
 
 	const dispatch = (action, payload) => {
-		let dispatcher = 'none';
 		switch (action) {
-			case 'setColor':
+			case actionTypes.UPDATE_COLOR:
 				/* Parcel doesn't like spread operator... ??
 				state = {
 					...state,
@@ -13,19 +19,21 @@ const Store = (defaultState) => {
 				};
 				*/
 				state = Object.assign(state, { color: payload });
-				dispatcher = 'colorChange';
 				break;
-			case 'setSize':
+			case actionTypes.UPDATE_GRID:
+				// TODO : update grid x,y+color
+				break;
+			case actionTypes.UPDATE_SIZE:
 				state = Object.assign(state, { size: payload });
-				dispatcher = 'sizeChange';
+				// TODO : redraw gridMatrix (size x size)
 				break;
 			default:
 				break;
 		}
 
-		if (dispatcher !== 'none') {
+		if (action) {
 			subscribers
-				.filter((subscriber) => ( subscriber.listener.includes(dispatcher) || subscriber.listener === 'all' ))
+				.filter((subscriber) => ( subscriber.listener.includes(action) || subscriber.listener === actionTypes.ALL ))
 				.forEach((subscriber) => { subscriber.callback(); })
 		}
 	};
@@ -46,4 +54,10 @@ const Store = (defaultState) => {
 	};
 };
 
-export const createStore = (defaultState) => { return new Store(defaultState); };
+export const defaultState = {
+	color: '#ff0000',
+	gridMatrix: [],
+	size: 16,
+};
+
+export const createStore = (initialState) => { return new Store(initialState); };

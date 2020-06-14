@@ -1,14 +1,9 @@
-import { createStore } from './store';
+import { createStore, defaultState } from './store';
 
 import { Download } from './download';
 import { Form } from './form';
 import { Grid } from './grid';
 import { Picker } from './picker';
-
-const defaultState = {
-	color: '#ff0000',
-	size: 16,
-};
 
 export const App = () => {
 	const store = createStore(defaultState);

@@ -1,3 +1,4 @@
+import { actionTypes } from './store';
 import { colors, createElement, resetHtml, rgbToHex, valueToRgb } from './utils';
 
 const arrowsSVG = `
@@ -33,7 +34,7 @@ export const Picker = ({ containerId, store }) => {
 		colorValue = Math.max(0, Math.min(1 - mouseY / maxRange, maxRange));
 
 		const rgb = valueToRgb(colorValue);
-		store.dispatch('setColor', rgbToHex(rgb));
+		store.dispatch(actionTypes.UPDATE_COLOR, rgbToHex(rgb));
 
 		render();
 	};

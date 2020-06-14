@@ -1,3 +1,4 @@
+import { actionTypes } from './store';
 import { createElement, contrastingColor, resetHtml } from './utils';
 
 export const Form = ({ containerId, store }) => {
@@ -7,7 +8,7 @@ export const Form = ({ containerId, store }) => {
 	const sizeContainer  = createElement('div', document.getElementById(containerId));
 
 	const colorInput  = createElement('input', colorContainer, { className: 'form-input form-input-color', props: { type: 'text', value: store.get('color').toUpperCase(), disabled: true }});
-	const widthInput  = createElement('input', sizeContainer, { className: 'form-input', props: { type: 'number', value: store.get('size') }});
+	const widthInput  = createElement('input', sizeContainer, { className: 'form-input spacer', props: { type: 'number', value: store.get('size') }});
 	const heightInput = createElement('input', sizeContainer, { className: 'form-input', props: { type: 'number', value: store.get('size') }});
 
 	// Methods
@@ -21,14 +22,14 @@ export const Form = ({ containerId, store }) => {
 	};
 	// Handlers
 	const handleColorChange = (evt) => {
-		store.dispatch('setColor', evt.target.value);
+		store.dispatch(actionTypes.UPDATE_COLOR, evt.target.value);
 	};
 	const handleSizeChange = (evt) => {
-		store.dispatch('setSize', evt.target.value);
+		store.dispatch(actionTypes.UPDATE_SIZE, evt.target.value);
 	};
 
 	// Listeners
-	store.subscribe('sizeChange colorChange', render);
+	store.subscribe(`${actionTypes.UPDATE_COLOR} ${actionTypes.UPDATE_SIZE}`, render);
 	// colorInput.addEventListener('change', handleColorChange);
 	widthInput.addEventListener('change', handleSizeChange);
 	heightInput.addEventListener('change', handleSizeChange);
