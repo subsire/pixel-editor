@@ -93,5 +93,26 @@ export const contrastingColor = (color) => {
 	return (yiq >= 128) ? '#000' : '#fff'
 };
 
-//
+// Grid and images methods
 export const getGridMatrix = (size) => ( Array(parseInt(size)).fill().map(() => ( Array(parseInt(size)).fill() )) );
+export const getCanvasFromGrid = (grid) => {
+	// Creating virtual canvas
+	const canvas  = document.createElement('canvas');
+	canvas.width  = grid.length;
+	canvas.height = grid.length;
+	const context = canvas.getContext('2d');
+
+	// Drawing
+	for (let x = 0; x < grid.length; x++) {
+		for (let y = 0; y < grid.length; y++) {
+			if (grid[x][y]) {
+				context.fillStyle = grid[x][y];
+				context.fillRect(x, y, 1, 1);
+			}
+		}
+	}
+
+	return canvas;
+};
+// export const canvasToPng = (canvas) => ( canvas.toDataURL('image/png') );
+// export const pngToDownloadable = (png) => ( png.replace(/^data:image\/[^;]*/, 'data:application/octet-stream') );
