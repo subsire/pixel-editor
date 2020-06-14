@@ -18,15 +18,15 @@ export const Picker = ({ containerId, store }) => {
 
 		const rect = slider.getBoundingClientRect();
 		const mouseY = evt.clientY - rect.top;
-		const value = mouseY / maxRange;
+		const value = 1 - mouseY / maxRange;
 
-		const rgb = valueToRgb(value); // NOT the right color...
+		const rgb = valueToRgb(value);
 		store.dispatch('setColor', rgbToHex(rgb));
 	};
 
 
 	// Listeners
-	slider.addEventListener('click', handleClick);
+	slider.addEventListener('mousedown', handleClick);
 
 	return {
 		render

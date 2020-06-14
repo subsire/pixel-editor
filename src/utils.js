@@ -61,7 +61,7 @@ export const valueToRgb = (value) => {
 	}
 
 	return {
-		red:   mix(colorCurr[0], colorNext[1], colorFrac),
+		red:   mix(colorCurr[0], colorNext[0], colorFrac),
 		green: mix(colorCurr[1], colorNext[1], colorFrac),
 		blue:  mix(colorCurr[2], colorNext[2], colorFrac),
 	};
