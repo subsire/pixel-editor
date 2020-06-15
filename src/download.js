@@ -46,14 +46,14 @@ export const Download = ({ containerId, store }) => {
 				downloadBlob(canvas.msToBlob());
 			} else {
 				// Creating a blob by myself...
-				var image = canvas.toDataURL();
+				const image = canvas.toDataURL();
 				image = image.replace(/^data:[a-z]*;,/, '');
 
 				// Convert from base64 to an ArrayBuffer
-				var byteString = atob(image);
-				var buffer = new ArrayBuffer(byteString.length);
-				var intArray = new Uint8Array(buffer);
-				for (var i = 0; i < byteString.length; i++) {
+				const byteString = atob(image);
+				const buffer = new ArrayBuffer(byteString.length);
+				const intArray = new Uint8Array(buffer);
+				for (let i = 0; i < byteString.length; i++) {
 				    intArray[i] = byteString.charCodeAt(i);
 				}
 
