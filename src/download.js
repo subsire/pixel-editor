@@ -46,7 +46,7 @@ export const Download = ({ containerId, store }) => {
 				downloadBlob(canvas.msToBlob());
 			} else {
 				// Creating a blob by myself...
-				const image = canvas.toDataURL();
+				let image = canvas.toDataURL();
 				image = image.replace(/^data:[a-z]*;,/, '');
 
 				// Convert from base64 to an ArrayBuffer
